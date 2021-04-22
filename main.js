@@ -30,38 +30,88 @@ function validateCred (arr) {
     const doubles = []
     let sum = 0
     
-    for (let i = arr.length-1; i >= 0; i--) {
+    for (let i = arr.length-2; i >= 0; i--) {
         let x = arr[i];
-        console.log('i = ' + i)
-        console.log('x = ' + x)
-        if ( i % 2 === 0) {
-            x *= 2
+        
+        //console.log('i = ' + i)
+        //console.log('x = ' + x)
+
+            if ( i % 2 === 0) {
+            x *= 2;
             if (x > 9) {
                 x -= 9;
             }
         }
-        
-        sum += x
-        console.log(sum)
-        return doubles
+        sum += x 
     }
-        
-            if (sum % 10 === 0) {
+        let arrLength = arr[arr.length-1]
+        //console.log(arrLength)
+        let totalSum = sum += arrLength
+        //console.log(totalSum)
+
+            if (totalSum % 10 === 0) {
              return true
               } else {
-             false
+              return false
               };
-    
 
 };
 
-console.log(valid1);
-console.log(validateCred(valid1));
+//console.log(valid3);
+//console.log(validateCred(valid3));
    
+function findInvalidCards (cards)  {
+   const invalid = [];
+   
+    for (let i = 0; i < cards.length; i++) {
+        let currCard = cards[i]
+        if (!validateCred(currCard)) {
+           invalid.push(currCard)
+        }
+    }
 
+    return invalid;
+};
 
+//console.log(findInvalidCards([invalid1, invalid2, invalid3, invalid4, invalid5]))
+//console.log(findInvalidCards(batch))
 
+function idInvalidCardCompanies (invalidCards) {
+    const companies = [];
 
+    for (i = 0; i < invalidCards.length; i++) {
+        
+        switch (invalidCards[i][0]) {
+            case 3:
+                if (companies.indexOf('American Express') === -1 ){
+                    companies.push('American Express');
+                }    
+            break
+            case 4:
+                if(companies.indexOf('Visa') === -1 ){
+                    companies.push('Visa');
+                }
+            break
+            case 5:
+                if(companies.indexOf('Mastercard') === -1 ){
+                    companies.push('Mastercard');
+                }
+            break
+            case 6:
+                if(companies.indexOf('Discover') === -1 ){
+                    companies.push('Discover');
+                }
+            break
+            default:
+                console.log('Company not found.');
+            break   
+        }
+    }
+        return companies;
+};
+
+//console.log(idInvalidCardCompanies([invalid4]));
+console.log(idInvalidCardCompanies(batch));
 
 
 
